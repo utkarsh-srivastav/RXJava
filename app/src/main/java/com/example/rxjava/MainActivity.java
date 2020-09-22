@@ -7,6 +7,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import java.math.BigDecimal;
+import java.util.Date;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.rxjava3.core.Observable;
@@ -40,10 +43,22 @@ public class MainActivity extends AppCompatActivity {
                 txtHi.setText(s);
             }
         });
-        Observable.just("Utkarsh", "Pranshu", "Deepak", "Swarnika", "Akanksha", "SnehLata", "Dhirendra" ).subscribe(new Consumer<String>() {
+//        Observable.just("Utkarsh", "Pranshu", "Deepak", "Swarnika", "Akanksha", "SnehLata", "Dhirendra" ).subscribe(new Consumer<String>() {
+//            @Override
+//            public void accept(String s) throws Throwable {
+//                rvCustomAdapter.addStringToList(s);
+//            }
+//        });
+
+        Entry entry1 = new Entry("PS4", BigDecimal.valueOf(1500), new Date());  //new date gives current date...
+        Entry entry2 = new Entry("Xbox One", BigDecimal.valueOf(2000), new Date());
+        Entry entry3 = new Entry("Xbox One S", BigDecimal.valueOf(2500), new Date());
+        Entry entry4 = new Entry("Xbox One X", BigDecimal.valueOf(3000), new Date());
+
+        Observable.just(entry1, entry2, entry3, entry4).subscribe(new Consumer<Entry>() {
             @Override
-            public void accept(String s) throws Throwable {
-                rvCustomAdapter.addStringToList(s);
+            public void accept(Entry entry) throws Throwable {
+                rvCustomAdapter.addEntry(entry);
             }
         });
     }
